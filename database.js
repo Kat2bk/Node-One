@@ -24,5 +24,42 @@ function getUserById(id) {
     })
 }
 
+// create user
+function createUser(data) {
+    const newUser = {
+        id: String(users.length + 1),
+        ...data
+    }
 
+    users.push(newUser)
+    return newUser
+}
 
+//update user
+function updateUser(id, data) {
+    const index = users.findIndex(user => {
+        return user.id === id
+    })
+
+   users[index] = {
+       ...users[index],
+       ...data
+   }
+    
+   return users[index]
+}
+
+//delete user
+function deleteUser(id) {
+    users = users.filter(user => {
+        return user.id !== id
+    })
+}
+
+module.exports = {
+    getUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+}
