@@ -87,7 +87,27 @@ server.put('/users/:id', (req, res) => {
     }
 })
 
+server.delete('/users/:id', (req, res) => {
+    const id = req.params.id;
 
+    if (!id) {
+        res.status(404).json({
+            message: "Unable to find user"
+        })
+    } else if (id) {
+        database.deleteUser(id);
+        res.status(200).json({
+            message: "User deleted"
+        })
+    } else {
+        res.status(500).json({
+            error: "User could not be deleted"
+        })
+    }
+
+})
+
+// you can also use try/catch statements with async before the req/res
 server.listen(port, () => {
     console.log(`server is listening on ${port}`)
 })
